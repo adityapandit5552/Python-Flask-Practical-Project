@@ -101,7 +101,7 @@ env
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
-MYSQL_PASSWORD=your_mysql_password
+MYSQL_PASSWORD=aadmin
 MYSQL_DB=cloud_test_db
 
 SECRET_KEY=super_secret_cloud_test_key
@@ -130,7 +130,7 @@ Open your browser and visit: http://localhost:5000 (or http://<your-cloud-instan
 ## 📂 Project Structure
 
 
-flask_with_mysql/
+Python-Flask-Practical-Project
 ├── app.py                  # Core Flask routes & PyMySQL logic
 ├── config.py               # Environment configuration loader
 ├── schema.sql              # Database setup & admin seed queries
@@ -150,8 +150,8 @@ flask_with_mysql/
 └── static/
     └── css/
         └── style.css       # Glassmorphism dark mode design system
-
-
+        
+---
 # Flask + MySQL Cloud Student Deployment Test
 
 This repository contains a complete, lightweight, and modern Flask web application integrated with a MySQL database.
