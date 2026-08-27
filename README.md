@@ -202,11 +202,11 @@ It is designed as a practical lab exercise for cloud computing students to pract
 
 ### adminitrator page
 
-![admin page](Administrator Panel.png)
+![admin page](AdministratorPanel.png)
 
 ### Database
 
-![database](Database.png)
+![database](Databases.png)
 
 ---
 
