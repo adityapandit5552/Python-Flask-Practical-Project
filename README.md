@@ -42,7 +42,7 @@ A lightweight, modern Flask web application integrated with a MySQL/MariaDB data
      │ ├── dashboard.html # User dashboard
      │ ├── admin_login.html # Administrator login portal
      │ └── admin_dashboard.html # Admin panel — user counts & directory
-     ├── static/
+     └── static/
          └── css/
              └── style.css # Glassmorphism dark-mode design system
 
