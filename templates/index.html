@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | Cloud Deployment Lab{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <h1 class="hero-title">Cloud Student <span>Deployment Test</span></h1>
+    <p class="hero-desc">
+        A lightweight, production-structured Flask web application powered by MySQL. Designed for students to practice cloud instance deployment, database schema setup, and environment variable configuration.
+    </p>
+
+    <div style="margin-bottom: 2rem;">
+        <span class="badge {% if db_status == 'Connected' %}badge-user{% else %}badge-admin{% endif %}" style="font-size: 1rem; padding: 0.5rem 1rem;">
+            Database Status: {{ db_status }}
+        </span>
+    </div>
+
+    <div class="hero-buttons">
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('dashboard') }}" class="btn-primary" style="width: auto; padding: 0.75rem 2rem;">Go to Dashboard</a>
+        {% else %}
+            <a href="{{ url_for('register') }}" class="btn-primary" style="width: auto; padding: 0.75rem 2rem;">Register Account</a>
+            <a href="{{ url_for('login') }}" class="btn-secondary">User Login</a>
+            <a href="{{ url_for('admin_login') }}" class="btn-secondary">Admin Login</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

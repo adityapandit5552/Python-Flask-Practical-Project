@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}User Dashboard | Cloud Deployment Lab{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto;">
+    <div style="margin-bottom: 2rem;">
+        <h1 style="font-size: 2.25rem; font-weight: 800;">Welcome, {{ session.get('username') }}! 👋</h1>
+        <p style="color: var(--text-muted); margin-top: 0.25rem;">Student User Dashboard Overview</p>
+    </div>
+
+    <div class="glass-card" style="max-width: 100%; margin-bottom: 2rem;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+            👤 Account Details
+        </h3>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+            <div>
+                <span class="form-label">User ID</span>
+                <p style="font-size: 1.1rem; font-weight: 600;">#{{ user.id if user else session.get('user_id') }}</p>
+            </div>
+            <div>
+                <span class="form-label">Username</span>
+                <p style="font-size: 1.1rem; font-weight: 600;">{{ user.username if user else session.get('username') }}</p>
+            </div>
+            <div>
+                <span class="form-label">Email</span>
+                <p style="font-size: 1.1rem; font-weight: 600;">{{ user.email if user else session.get('email') }}</p>
+            </div>
+            <div>
+                <span class="form-label">Account Role</span>
+                <p style="margin-top: 0.25rem;">
+                    <span class="badge badge-user">{{ user.role if user else session.get('role') }}</span>
+                </p>
+            </div>
+            {% if user and user.created_at %}
+            <div>
+                <span class="form-label">Registered On</span>
+                <p style="font-size: 0.95rem; color: var(--text-muted);">{{ user.created_at }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="glass-card" style="max-width: 100%;">
+        <h3 style="font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+            🚀 Deployment Diagnostic Check
+        </h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.25rem; font-size: 0.95rem;">
+            If you can view this page, your Flask application and MySQL database are successfully connected and executing queries on your cloud instance!
+        </p>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="{{ url_for('logout') }}" class="btn-secondary">Log Out</a>
+            {% if session.get('role') == 'admin' %}
+                <a href="{{ url_for('admin_dashboard') }}" class="btn-primary" style="width: auto; padding: 0.75rem 1.5rem;">Go to Admin Portal</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard | Cloud Deployment Lab{% endblock %}
+
+{% block content %}
+<div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+        <div>
+            <h1 style="font-size: 2.25rem; font-weight: 800;">Administrator Panel 👑</h1>
+            <p style="color: var(--text-muted); margin-top: 0.25rem;">Monitor student registration metrics and MySQL user records</p>
+        </div>
+        <div>
+            <a href="{{ url_for('dashboard') }}" class="btn-secondary">User View</a>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-label">Total Student Users</span>
+            <span class="stat-number">{{ total_users }}</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Admin Accounts</span>
+            <span class="stat-number" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                {{ total_admins }}
+            </span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Total DB Accounts</span>
+            <span class="stat-number" style="background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                {{ users|length }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Registered Users Data Table -->
+    <h3 style="font-size: 1.35rem; margin-bottom: 1rem; font-weight: 700;">Registered User Directory</h3>
+
+    <div class="table-container">
+        {% if users %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in users %}
+                        <tr>
+                            <td>#{{ u.id }}</td>
+                            <td style="font-weight: 600;">{{ u.username }}</td>
+                            <td style="color: var(--text-muted);">{{ u.email }}</td>
+                            <td>
+                                {% if u.role == 'admin' %}
+                                    <span class="badge badge-admin">Admin</span>
+                                {% else %}
+                                    <span class="badge badge-user">User</span>
+                                {% endif %}
+                            </td>
+                            <td style="color: var(--text-muted); font-size: 0.9rem;">{{ u.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div style="padding: 3rem; text-align: center; color: var(--text-muted);">
+                <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">No registered users found in MySQL table.</p>
+                <p style="font-size: 0.9rem;">Register a new user account to see data populate in real-time.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

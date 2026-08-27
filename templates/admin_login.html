@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Login | Cloud Deployment Lab{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="glass-card" style="border-color: rgba(168, 85, 247, 0.4);">
+        <div style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">👑</div>
+        <h2 class="card-title">Admin Portal Login</h2>
+        <p class="card-subtitle">Administrator credentials required to view user metrics</p>
+
+        <form action="{{ url_for('admin_login') }}" method="POST">
+            <div class="form-group">
+                <label for="username" class="form-label">Admin Username or Email</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="admin" required autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-primary" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);">Login as Admin</button>
+        </form>
+
+        <div class="form-footer">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                Default Test Admin: <code>admin</code> / <code>admin123</code>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
