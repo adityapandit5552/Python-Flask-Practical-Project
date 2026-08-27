@@ -142,4 +142,8 @@ flask_with_mysql/
 └── static/
     └── css/
         └── style.css       # Glassmorphism dark mode design system
+
 ```
+##screenshots
+![](home.png) 
+
