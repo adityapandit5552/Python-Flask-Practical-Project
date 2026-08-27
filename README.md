@@ -6,22 +6,22 @@ This repository contains a complete, lightweight, and modern Flask web applicati
 
 ## 📋 Features Included
 
-1. **User Registration**: Register new accounts with secure password hashing (`Werkzeug`).
-2. **User Login & Session Management**: Session-based login for users and admins.
-3. **User Dashboard**: Protected dashboard displaying user account metrics.
-4. **Password Reset**: Password update functionality by username/email.
-5. **Admin Portal**: Admin login and dashboard displaying total user counts and a registered user directory table.
-6. **Glassmorphism Dark Theme**: Fully responsive CSS styling with status badges and animations.
+1. *User Registration*: Register new accounts with secure password hashing (Werkzeug).
+2. *User Login & Session Management*: Session-based login for users and admins.
+3. *User Dashboard*: Protected dashboard displaying user account metrics.
+4. *Password Reset*: Password update functionality by username/email.
+5. *Admin Portal*: Admin login and dashboard displaying total user counts and a registered user directory table.
+6. *Glassmorphism Dark Theme*: Fully responsive CSS styling with status badges and animations.
 
 ---
 
 ## 🗄️ MySQL Database Setup & SQL Queries
 
-Give the following SQL queries / commands to your students or execute `schema.sql`:
+Give the following SQL queries / commands to your students or execute schema.sql:
 
 ### 1. Create Database and Table manually in MySQL CLI:
 
-```sql
+sql
 -- Step 1: Create the Database
 CREATE DATABASE IF NOT EXISTS `cloud_test_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -40,31 +40,34 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Step 3: Insert Default Seed Admin User (Password: admin123)
 INSERT INTO `users` (`username`, `email`, `password_hash`, `role`)
 VALUES (
-    'admin', 
-    'admin@cloudtest.com', 
-    'scrypt:32768:8:1$7nXZwQ3p6Yp7$24c883ed6df65ecf50a8b9eeb2db8fa0b555d4ee7e3fa4923e5904d9c791dd15e3474327299a9cfb0114ae39f7a77d54238eeb5ca5d1e2e4efcf291bfecf074d', 
+    'admin',
+    'admin@cloudtest.com',
+    'scrypt:32768:8:1$7nXZwQ3p6Yp7$24c883ed6df65ecf50a8b9eeb2db8fa0b555d4ee7e3fa4923e5904d9c791dd15e3474327299a9cfb0114ae39f7a77d54238eeb5ca5d1e2e4efcf291bfecf074d',
     'admin'
 )
 ON DUPLICATE KEY UPDATE `username`=`username`;
-```
 
-### Or Import the `schema.sql` file directly:
-```bash
+
+### Or Import the schema.sql file directly:
+
+bash
 mysql -u root -p < schema.sql
-```
+
 
 ---
 
 ## 🚀 Quickstart Instructions for Students
 
 ### 1. Clone & Navigate to Project Directory
-```bash
+
+bash
 git clone <repository_url>
 cd flask_with_mysql
-```
+
 
 ### 2. Create and Activate Virtual Environment
-```bash
+
+bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
@@ -72,25 +75,29 @@ venv\Scripts\activate
 # Linux / MacOS
 python3 -m venv venv
 source venv/bin/activate
-```
+
 
 ### 3. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
 
-### 4. Configure Environment Variables (`.env`)
-Copy `.env.example` to `.env` and fill in your MySQL credentials:
-```bash
+bash
+pip install -r requirements.txt
+
+
+### 4. Configure Environment Variables (.env)
+
+Copy .env.example to .env and fill in your MySQL credentials:
+
+bash
 # Windows (PowerShell)
 Copy-Item .env.example .env
 
 # Linux / MacOS
 cp .env.example .env
-```
 
-Open `.env` and set your configuration:
-```env
+
+Open .env and set your configuration:
+
+env
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
@@ -99,29 +106,30 @@ MYSQL_DB=cloud_test_db
 
 SECRET_KEY=super_secret_cloud_test_key
 PORT=5000
-```
+
 
 ### 5. Run the Application
-```bash
-python app.py
-```
 
-Open your browser and visit: `http://localhost:5000` (or `http://<your-cloud-instance-ip>:5000`)
+bash
+python app.py
+
+
+Open your browser and visit: http://localhost:5000 (or http://<your-cloud-instance-ip>:5000)
 
 ---
 
 ## 🔐 Default Admin Test Credentials
 
-- **Username**: `admin`
-- **Email**: `admin@cloudtest.com`
-- **Password**: `admin123`
-- **Admin Portal Link**: `http://localhost:5000/admin/login`
+- *Username*: admin
+- *Email*: admin@cloudtest.com
+- *Password*: admin123
+- *Admin Portal Link*: http://localhost:5000/admin/login
 
 ---
 
 ## 📂 Project Structure
 
-```
+
 flask_with_mysql/
 ├── app.py                  # Core Flask routes & PyMySQL logic
 ├── config.py               # Environment configuration loader
@@ -143,7 +151,78 @@ flask_with_mysql/
     └── css/
         └── style.css       # Glassmorphism dark mode design system
 
-```
-##screenshots
-![](home.png) 
 
+# Flask + MySQL Cloud Student Deployment Test
+
+This repository contains a complete, lightweight, and modern Flask web application integrated with a MySQL database.
+
+It is designed as a practical lab exercise for cloud computing students to practice deploying a Python Flask web application and MySQL database on cloud platforms such as AWS EC2.
+
+---
+
+## 📋 Features Included
+
+1. *User Registration*  
+   Register new accounts with secure password hashing using Werkzeug.
+
+2. *User Login & Session Management*  
+   Session-based authentication for users and administrators.
+
+3. *User Dashboard*  
+   Protected dashboard displaying user account information and metrics.
+
+4. *Password Reset*  
+   Password update functionality using username/email.
+
+5. *Admin Portal*  
+   Admin login and dashboard displaying total users and registered user information.
+
+6. *Glassmorphism Dark Theme*  
+   Modern, responsive interface with status badges, animations, and dark styling.
+
+---
+
+## 📸 Project Screenshots
+
+### 🏠 Home Page
+
+![Home Page](home.png)
+
+### 📝 User Registration
+
+![User Registration](createaccount.png)
+
+### 🔐 User Login
+
+![User Login](loginpage.png)
+
+### 📊 User Dashboard
+
+![User Dashboard](dashboard.png)
+
+### adminitrator page
+
+![admin page](Administrator Panel.png)
+
+### Database
+
+![database](Database.png)
+
+---
+
+## 🗄️ MySQL Database Setup & SQL Queries
+
+The project uses *MySQL* as the database.
+
+### 1. Create Database
+
+Open the MySQL command line:
+
+sql
+CREATE DATABASE IF NOT EXISTS `cloud_test_db`
+DEFAULT CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE `cloud_test_db`;
+
+## 🗄️ MySQL Database Setup & SQL Queries
