@@ -131,8 +131,8 @@ Open your browser and visit: http://localhost:5000 (or http://<your-cloud-instan
 
 
 Python-Flask-Practical-Project
-├── app.py                  # Core Flask routes & PyMySQL logic
-├── config.py               # Environment configuration loader
+├─── app.py                  # Core Flask routes & PyMySQL logic
+├─── config.py               # Environment configuration loader
 ├── schema.sql              # Database setup & admin seed queries
 ├── requirements.txt        # Python package dependencies
 ├── .env.example            # Environment setup template
