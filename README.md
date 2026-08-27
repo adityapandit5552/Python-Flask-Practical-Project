@@ -210,19 +210,3 @@ It is designed as a practical lab exercise for cloud computing students to pract
 
 ---
 
-## 🗄️ MySQL Database Setup & SQL Queries
-
-The project uses *MySQL* as the database.
-
-### 1. Create Database
-
-Open the MySQL command line:
-
-sql
-CREATE DATABASE IF NOT EXISTS `cloud_test_db`
-DEFAULT CHARACTER SET utf8mb4
-COLLATE utf8mb4_unicode_ci;
-
-USE `cloud_test_db`;
-
-## 🗄️ MySQL Database Setup & SQL Queries
