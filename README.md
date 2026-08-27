@@ -1,43 +1,80 @@
-# Flask + MySQL Cloud Student Deployment Test
+# Flask + MySQL Cloud Deployment Lab
 
-This repository contains a complete, lightweight, and modern Flask web application integrated with a MySQL database. It is designed as a practical lab exercise for cloud computing students to test deploying web applications and database integrations on cloud instances (e.g., AWS EC2, Azure VMs, GCP Compute, Heroku/Render).
-
----
-
-## 📋 Features Included
-
-1. *User Registration*: Register new accounts with secure password hashing (Werkzeug).
-2. *User Login & Session Management*: Session-based login for users and admins.
-3. *User Dashboard*: Protected dashboard displaying user account metrics.
-4. *Password Reset*: Password update functionality by username/email.
-5. *Admin Portal*: Admin login and dashboard displaying total user counts and a registered user directory table.
-6. *Glassmorphism Dark Theme*: Fully responsive CSS styling with status badges and animations.
+A lightweight, modern Flask web application integrated with a MySQL/MariaDB database. Built as a practical lab exercise for cloud computing students to practice deploying a Python web application with a relational database on cloud infrastructure (AWS EC2, Azure VMs, GCP Compute, Heroku, Render, etc.).
 
 ---
 
-## 🗄️ MySQL Database Setup & SQL Queries
+## Features
 
-Give the following SQL queries / commands to your students or execute schema.sql:
+| Feature | Description |
+|---|---|
+| **User Registration** | Create new accounts with secure password hashing via Werkzeug |
+| **Login & Session Management** | Session-based authentication for both users and administrators |
+| **User Dashboard** | Protected page displaying account details and metrics |
+| **Password Reset** | Update a password using a registered username or email |
+| **Admin Portal** | Separate admin login with a dashboard showing total users and a full user directory |
+| **Glassmorphism Dark Theme** | Responsive, modern UI with status badges and subtle animations |
 
-### 1. Create Database and Table manually in MySQL CLI:
+---
 
-sql
--- Step 1: Create the Database
-CREATE DATABASE IF NOT EXISTS `cloud_test_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+## Project Structure
+---
+     Python-Flask-Practical-Project/
+     ├── app.py # Core Flask routes & PyMySQL logic
+     ├── config.py # Environment configuration loader
+     ├── schema.sql # Database setup & admin seed queries
+     ├── requirements.txt # Python package dependencies
+     ├── .env.example # Environment variable template
+     ├── .env # Local environment variables (not committed)
+     ├── README.md # Project documentation
+     ├── home.png
+     ├── createaccount.png
+     ├── loginpage.png
+     ├── dashboard.png
+     ├── AdministratorPanel.png
+     └── Databases.png
+     ├── templates/
+     │ ├── base.html # Base layout, navigation & toast alerts
+     │ ├── index.html # Landing page with DB connection status
+     │ ├── register.html # User registration page
+     │ ├── login.html # User login page
+     │ ├── reset_password.html # Password reset page
+     │ ├── dashboard.html # User dashboard
+     │ ├── admin_login.html # Administrator login portal
+     │ └── admin_dashboard.html # Admin panel — user counts & directory
+     ├── static/
+         └── css/
+             └── style.css # Glassmorphism dark-mode design system
+
+
+## Database Setup
+
+### Option A — Run the schema file directly
+
+```bash
+mysql -u root -p < schema.sql
+```
+
+### Option B — Run the SQL manually
+
+```sql
+-- Create the database
+CREATE DATABASE IF NOT EXISTS `cloud_test_db`
+  DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE `cloud_test_db`;
 
--- Step 2: Create Users Table
+-- Create the users table
 CREATE TABLE IF NOT EXISTS `users` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY,
-    `username` VARCHAR(50) NOT NULL UNIQUE,
-    `email` VARCHAR(100) NOT NULL UNIQUE,
+    `id`            INT AUTO_INCREMENT PRIMARY KEY,
+    `username`      VARCHAR(50)  NOT NULL UNIQUE,
+    `email`         VARCHAR(100) NOT NULL UNIQUE,
     `password_hash` VARCHAR(255) NOT NULL,
-    `role` ENUM('user', 'admin') DEFAULT 'user',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    `role`          ENUM('user', 'admin') DEFAULT 'user',
+    `created_at`    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Step 3: Insert Default Seed Admin User (Password: admin123)
+-- Seed a default admin user (password: admin123)
 INSERT INTO `users` (`username`, `email`, `password_hash`, `role`)
 VALUES (
     'admin',
@@ -45,168 +82,110 @@ VALUES (
     'scrypt:32768:8:1$7nXZwQ3p6Yp7$24c883ed6df65ecf50a8b9eeb2db8fa0b555d4ee7e3fa4923e5904d9c791dd15e3474327299a9cfb0114ae39f7a77d54238eeb5ca5d1e2e4efcf291bfecf074d',
     'admin'
 )
-ON DUPLICATE KEY UPDATE `username`=`username`;
+ON DUPLICATE KEY UPDATE `username` = `username`;
+```
 
-
-### Or Import the schema.sql file directly:
-
-bash
-mysql -u root -p < schema.sql
-
+> **Note:** the seed hash above corresponds to `admin123`. If you regenerate it locally, make sure to use the same Werkzeug version installed in `requirements.txt` so the hash format matches.
 
 ---
 
-## 🚀 Quickstart Instructions for Students
+## Quickstart
 
-### 1. Clone & Navigate to Project Directory
+### 1. Clone the repository
 
-bash
+```bash
 git clone <repository_url>
-cd flask_with_mysql
+cd Python-Flask-Practical-Project
+```
 
+### 2. Create and activate a virtual environment
 
-### 2. Create and Activate Virtual Environment
-
-bash
+```bash
 # Windows
 python -m venv venv
 venv\Scripts\activate
 
-# Linux / MacOS
+# Linux / macOS
 python3 -m venv venv
 source venv/bin/activate
+```
 
+### 3. Install dependencies
 
-### 3. Install Dependencies
-
-bash
+```bash
 pip install -r requirements.txt
+```
 
+### 4. Configure environment variables
 
-### 4. Configure Environment Variables (.env)
-
-Copy .env.example to .env and fill in your MySQL credentials:
-
-bash
+```bash
 # Windows (PowerShell)
 Copy-Item .env.example .env
 
-# Linux / MacOS
+# Linux / macOS
 cp .env.example .env
+```
 
+Edit `.env` with your own MySQL credentials:
 
-Open .env and set your configuration:
-
-env
+```env
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 MYSQL_USER=root
-MYSQL_PASSWORD=aadmin
+MYSQL_PASSWORD=your_mysql_password
 MYSQL_DB=cloud_test_db
 
 SECRET_KEY=super_secret_cloud_test_key
 PORT=5000
+```
 
+> `.env` is gitignored — never commit real credentials to version control.
 
-### 5. Run the Application
+### 5. Run the application
 
-bash
+```bash
 python app.py
+```
 
-
-Open your browser and visit: http://localhost:5000 (or http://<your-cloud-instance-ip>:5000)
-
----
-
-## 🔐 Default Admin Test Credentials
-
-- *Username*: admin
-- *Email*: admin@cloudtest.com
-- *Password*: admin123
-- *Admin Portal Link*: http://localhost:5000/admin/login
+Visit **http://localhost:5000** locally, or **http://\<your-cloud-instance-ip\>:5000** when deployed.
 
 ---
 
-## 📂 Project Structure
+## Default Admin Credentials
 
+| Field | Value |
+|---|---|
+| Username | `admin` |
+| Email | `admin@cloudtest.com` |
+| Password | `admin123` |
+| Admin Portal | `/admin/login` |
 
-Python-Flask-Practical-Project
-├─── app.py                  # Core Flask routes & PyMySQL logic
-├─── config.py               # Environment configuration loader
-├── schema.sql              # Database setup & admin seed queries
-├── requirements.txt        # Python package dependencies
-├── .env.example            # Environment setup template
-├── .env                    # Local environment variables (DB host/user/pass)
-├── README.md               # Student deployment guide & instructions
-├── templates/
-│   ├── base.html           # Base layout with navigation & toast alerts
-│   ├── index.html          # Landing page with DB connection status
-│   ├── register.html       # Student registration page
-│   ├── login.html          # User login page
-│   ├── reset_password.html # Password reset page
-│   ├── dashboard.html      # User dashboard
-│   ├── admin_login.html    # Administrator login portal
-│   └── admin_dashboard.html# Admin panel showing total user counts & directory
-└── static/
-    └── css/
-        └── style.css       # Glassmorphism dark mode design system
-        
----
-# Flask + MySQL Cloud Student Deployment Test
-
-This repository contains a complete, lightweight, and modern Flask web application integrated with a MySQL database.
-
-It is designed as a practical lab exercise for cloud computing students to practice deploying a Python Flask web application and MySQL database on cloud platforms such as AWS EC2.
+> ⚠️ **Security note:** change this password immediately if the instance is reachable from the public internet. Default credentials should never persist on a live, externally accessible deployment.
 
 ---
 
-## 📋 Features Included
+## Screenshots
 
-1. *User Registration*  
-   Register new accounts with secure password hashing using Werkzeug.
-
-2. *User Login & Session Management*  
-   Session-based authentication for users and administrators.
-
-3. *User Dashboard*  
-   Protected dashboard displaying user account information and metrics.
-
-4. *Password Reset*  
-   Password update functionality using username/email.
-
-5. *Admin Portal*  
-   Admin login and dashboard displaying total users and registered user information.
-
-6. *Glassmorphism Dark Theme*  
-   Modern, responsive interface with status badges, animations, and dark styling.
-
----
-
-## 📸 Project Screenshots
-
-### 🏠 Home Page
-
+### Home Page
 ![Home Page](home.png)
 
-### 📝 User Registration
-
+### User Registration
 ![User Registration](createaccount.png)
 
-### 🔐 User Login
-
+### User Login
 ![User Login](loginpage.png)
 
-### 📊 User Dashboard
-
+### User Dashboard
 ![User Dashboard](dashboard.png)
 
-### adminitrator page
-
-![admin page](AdministratorPanel.png)
+### Administrator Panel
+![Admin Panel](AdministratorPanel.png)
 
 ### Database
-
-![database](Databases.png)
+![Database](Databases.png)
 
 ---
 
+## License
+
+This project is intended for educational use as part of a cloud computing lab exercise.
