@@ -34,14 +34,14 @@ A lightweight, modern Flask web application integrated with a MySQL/MariaDB data
      ├── AdministratorPanel.png
      └── Databases.png
      ├── templates/
-     │ ├── base.html # Base layout, navigation & toast alerts
-     │ ├── index.html # Landing page with DB connection status
-     │ ├── register.html # User registration page
-     │ ├── login.html # User login page
-     │ ├── reset_password.html # Password reset page
-     │ ├── dashboard.html # User dashboard
-     │ ├── admin_login.html # Administrator login portal
-     │ └── admin_dashboard.html # Admin panel — user counts & directory
+     │   ├── base.html # Base layout, navigation & toast alerts
+     │   ├── index.html # Landing page with DB connection status
+     │   ├── register.html # User registration page
+     │   ├── login.html # User login page
+     │   ├── reset_password.html # Password reset page
+     │   ├── dashboard.html # User dashboard
+     │   ├── admin_login.html # Administrator login portal
+     │   └── admin_dashboard.html # Admin panel — user counts & directory
      └── static/
          └── css/
              └── style.css # Glassmorphism dark-mode design system
